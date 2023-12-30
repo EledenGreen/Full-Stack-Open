@@ -1,20 +1,10 @@
 const Header = (props) => {
   return (
     <div>
-      <p>Course Name: {props.name}</p>
+      <p>Course Name: {props.course}</p>
     </div>
   )
 }
-
-const Content = (props) => {
-  return (
-    <div>
-      <p>Part {props.no}:{props.name}</p>
-      <p>Exercises: {props.exercise}</p>
-    </div>
-  )
-}
-
 
 const Total = (props) => {
   return (
@@ -35,12 +25,30 @@ const App = () => {
 
   return (
     <>
-      <Header name = {course}/>
-      <Content name = {part1} no='1' exercise = {exercises1} />
-      <Content name = {part2} no='2' exercise = {exercises2} />
-      <Content name = {part3} no='3' exercise = {exercises3} />
+      <Header course = {course}/>
+      {/* Here, we have to pass the const variable so that 'Const' component can access it  */}
+      <Content part1 = {part1} part2={part2} part3={part3} exercises1={exercises1} exercises2={exercises2} exercises3={exercises3}/>
       <Total value = {exercises1 + exercises2 + exercises3} />
     </>
+  )
+}
+
+//const variables are passed as props by the <Content .... />
+const Content = ({part1,part2,part3,exercises1,exercises2,exercises3}) => {
+  return (
+    <div>
+      <Part no='1' topic={part1} exercise={exercises1} />
+      <Part no='2' topic={part2} exercise={exercises2} />
+      <Part no='3' topic={part3} exercise={exercises3} />
+    </div>
+  )
+}
+
+const Part = ({no, topic, exercise}) => {
+  return (
+    <div>
+      <p>Part {no}:{topic} | Exercises: {exercise}</p>
+    </div>
   )
 }
 
