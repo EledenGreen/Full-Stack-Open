@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
-const Button = (props) => {
-  return(
+const Button = (props) => (
     <button onClick={props.handleClick}>
       next anecdote
     </button>
-  )
-}
+)
 
 const Quote = ({anecdotes, selected}) => {
   return(
@@ -30,19 +28,39 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
-
+  const [myArray, setmyArray] = useState(Array(8).fill(0))
 
   const handleClick = () => {
     setSelected(Math.floor(Math.random()* 8))
   }
 
+  const IncreaseVote = () => {
+    setmyArray( prevArray => {
+      const newArray = [...prevArray]
+      newArray[selected] += 1
+      return newArray
+    })
+  }
+  
+
   return (
     <div>
+      <div>
       <Quote anecdotes={anecdotes} selected={selected} />
+      has {myArray[selected]} votes
+      </div>
+      <br></br>
+      <Vote IncreaseVote={IncreaseVote} />
       <Button handleClick = {handleClick} />
     </div>
   )
 }
 
+const Vote = (props) => {
+  return (
+  <button onClick={props.IncreaseVote}>
+    vote
+  </button>)
+}
 
 export default App
