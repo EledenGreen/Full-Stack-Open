@@ -12,17 +12,6 @@ const Total = (props) => {
     </div>
   )
 }
- 
-const Stats = (props) => {
-  return (
-    <div>
-      <div>Good = {props.good}</div>
-      <div>Neutral = {props.neutral}</div>
-      <div>Bad = {props.bad}</div>
-    </div>
-
-  )
-}
 
 const Statistics = (props) => {
 
