@@ -24,18 +24,46 @@ const Stats = (props) => {
   )
 }
 
-const Avg = (props) => {
+const Statistics = (props) => {
 
   let w_good = props.good*1
   let w_bad = props.bad*-1
   let w_neutral = props.neutral*0
   let numerator = w_good + w_bad + w_neutral
+  let avg = numerator/props.total
+  let good_per = (props.good/props.total)*100
+  let str = good_per + ' ' + '%'
+  if(props.total == 0)
+  {
+    return(
+      <div>No feedback given</div>
+    )
+  }
+  else
+  {
+  return (
+    <table>
+      <StatisticLine text='Good' value={props.good} />
+      <StatisticLine text='Neutral' value={props.neutral} />
+      <StatisticLine text='Bad' value={props.bad} />
+      <StatisticLine text="All" value={props.total} />
+      <StatisticLine text='Average' value={avg} />
+      <StatisticLine text='Positive' value={str} />
+    </table>
+  )
+  }
+}
+
+const StatisticLine = (props) => {
 
   return (
-    <div>
-      Average: {numerator/props.total}
-    </div>
+    <tbody>
+      <tr>
+      <td>{props.text}</td><td>: {props.value} </td>
+      </tr>
+    </tbody>
   )
+  
 }
 
 const App = () => {
@@ -68,11 +96,9 @@ const App = () => {
       <Button handleClick = {handleBadClick} text='Bad' />
       <div></div>
       <br></br>
-      <div><strong>Statistics</strong></div>
+      <div><strong>STATISTICS</strong></div>
       <br></br>
-      <Stats good={good} neutral={neutral} bad={bad} />
-      <Total total={good+bad+neutral} />
-      <Avg good={good} neutral={neutral} bad={bad} />
+      <Statistics good={good} neutral={neutral} bad={bad} total={good+bad+neutral}/>
     </div>
   )
 }
