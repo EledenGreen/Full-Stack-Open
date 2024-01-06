@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const Button = (props) => (
-    <button onClick={props.handleClick}>
+    <button class="static-button" onClick={props.handleClick}>
       next anecdote
     </button>
 )
