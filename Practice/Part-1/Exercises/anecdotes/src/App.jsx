@@ -45,14 +45,36 @@ const App = () => {
 
   return (
     <div>
+      <div><strong>Anecdote of the day</strong></div>
+      <br></br>
       <div>
       <Quote anecdotes={anecdotes} selected={selected} />
       has {myArray[selected]} votes
       </div>
       <br></br>
+      <div>
       <Vote IncreaseVote={IncreaseVote} />
       <Button handleClick = {handleClick} />
+      </div>
+      <br></br>
+      <div>
+      <div><strong>Anecdote with most votes</strong></div>
+      <br></br>
+      <Content myArray={myArray} anecdotes={anecdotes} />
+      </div>
     </div>
+  )
+}
+
+const Content = ({myArray, anecdotes}) => {
+  const max=Math.max(...myArray)
+  const index = myArray.indexOf(max)
+  return(
+    <div>
+      {anecdotes[index]}
+      <div>has {max} votes</div>
+    </div>
+    
   )
 }
 
