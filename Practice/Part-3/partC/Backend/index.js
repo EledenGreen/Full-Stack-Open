@@ -39,11 +39,6 @@ let notes = [
   }
 ]
 
-app.get('/', (req, response) => { 
-  Note.find({}).then(notes => {
-    response.json(notes)
-  })
-})
 
 app.get('/api/notes', (req, response) => {
   Note.find({}).then(notes => {
@@ -84,10 +79,9 @@ app.get('/api/notes/:id', (request, response) => {
 })
 
 app.delete('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
-  notes = notes.filter(note => note.id !== id)
-
-  response.status(204).end()
+  Note.findByIdAndDelete(request.params.id).then(note => {
+    response.json(note)
+  })
 })
 
 const PORT = process.env.PORT
