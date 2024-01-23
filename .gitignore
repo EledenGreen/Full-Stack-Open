@@ -5,3 +5,5 @@ onenote.*
 .docx
 
 /Materials/
+
+.env
