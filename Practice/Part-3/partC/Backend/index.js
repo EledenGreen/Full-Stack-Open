@@ -68,23 +68,19 @@ app.post('/api/notes', (request, response) => {
   })
 })
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-app.use(unknownEndpoint)
-
 app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then(note => {
-      if(note){
+      if(note)
+      {
         response.json(note)
       }
       else
       {
         response.status(404).end()
       }
-  })
-  .catch(error => next(error))
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/notes/:id', (request, response) => {
@@ -124,4 +120,9 @@ const errorHandler = (error, request, response, next) => {
   }
   next(error)
 }
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+app.use(unknownEndpoint)
 app.use(errorHandler)
