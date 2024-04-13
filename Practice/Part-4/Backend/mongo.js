@@ -1,3 +1,5 @@
+//this file is no longer needed
+
 const mongoose = require('mongoose')
 
 if( process.argv.length < 3 ) {
