@@ -28,17 +28,15 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-after(async () => {
-  await mongoose.connection.close()
-})
-
 test('there are two notes', async () => {
+  console.log('entered test')
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, helper.initialNotes.length)
 })
 
 test('the first note is about HTTP methods', async () => {
+  console.log('entered test')
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -46,12 +44,14 @@ test('the first note is about HTTP methods', async () => {
 })
 
 test('all notes are returned', async () => {
+  console.log('entered test')
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, helper.initialNotes.length)
 })
 
 test('a specific note is within the returned notes', async () => {
+  console.log('entered test')
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(r => r.content)
@@ -60,6 +60,7 @@ test('a specific note is within the returned notes', async () => {
 })
 
 test('a valid note can be added ', async () => {
+  console.log('entered test')
   const newNote  = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -81,6 +82,7 @@ test('a valid note can be added ', async () => {
 })
 
 test('note without content is not added', async () => {
+  console.log('entered test')
   const newNote = {
     important: true
   }
@@ -96,6 +98,7 @@ test('note without content is not added', async () => {
 })
 
 test('a specific note can be viewed', async () => {
+  console.log('entered test')
   const notesAtStart = await helper.notesInDb()
 
   const noteToView = notesAtStart[0]
@@ -109,6 +112,7 @@ test('a specific note can be viewed', async () => {
 })
 
 test('a note can be deleted', async () => {
+  console.log('entered test')
   const notesAtStart = await helper.notesInDb()
   const notesToDelete = notesAtStart[0]
 
