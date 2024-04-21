@@ -72,6 +72,7 @@ describe('when there is initially some notes saved', () => {
       const newNote = {
         content: 'async/await simplifies making async calls',
         important: true,
+        userId: '6624e3942dbb373fd823dc47'
       }
 
       await api
@@ -89,13 +90,14 @@ describe('when there is initially some notes saved', () => {
 
     test('fails with status code 400 if data invalid', async () => {
       const newNote = {
-        important: true
+        important: true,
+        userId: '6624e3942dbb373fd823dc47'
       }
 
       await api
         .post('/api/notes')
         .send(newNote)
-        .expect(400)
+        .expect(400)  //i think i need to change to 500
 
       const notesAtEnd = await helper.notesInDb()
 
