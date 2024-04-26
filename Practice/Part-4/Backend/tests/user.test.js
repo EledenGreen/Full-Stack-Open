@@ -62,3 +62,7 @@ describe('when there is initially one user in db', () => {
     assert.strictEqual(usersAtEnd.length, usersAtStart.length)
   })
 })
+
+after(async () => {
+  await mongoose.connection.close()
+})
