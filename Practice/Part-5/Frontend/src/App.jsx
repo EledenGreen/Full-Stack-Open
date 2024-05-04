@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 import Notification from './components/Notificatio'
@@ -37,7 +37,7 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-  
+
     try {
       const user = await loginService.login({
         username, password,
@@ -46,7 +46,7 @@ const App = () => {
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
       )
-  
+
       noteService.setToken(user.token)
       setUser(user)
       setUsername('')
@@ -59,19 +59,19 @@ const App = () => {
     }
   }
 
-const loginForm = () => {
-  return (
-  <Toggleable buttonLabel='login'>
-    <LoginForm
+  const loginForm = () => {
+    return (
+      <Toggleable buttonLabel='login'>
+        <LoginForm
           username={username}
           password={password}
           handleUsernameChange={({ target }) => setUsername(target.value)}
           handlePasswordChange={({ target }) => setPassword(target.value)}
           handleSubmit={handleLogin}
-    />
-  </Toggleable>
-  )
-}
+        />
+      </Toggleable>
+    )
+  }
 
   console.log('render', notes.length, 'notes')
 
@@ -86,17 +86,17 @@ const loginForm = () => {
 
   const noteForm = () => {
     return (
-    <Toggleable buttonLabel="new note" ref={noteFormRef}>
-      <NoteForm createNote={addNote} />
-    </Toggleable>
+      <Toggleable buttonLabel="new note" ref={noteFormRef}>
+        <NoteForm createNote={addNote} />
+      </Toggleable>
     )
   }
 
-  const notesToShow = showAll ? notes: notes.filter(note=>note.important === true)
+  const notesToShow = showAll ? notes: notes.filter(note => note.important === true)
 
   const toggleImportanceOf = (id) => {
     const note = notes.find(n => n.id === id)
-    const changedNote = {...note, important: !note.important }
+    const changedNote = { ...note, important: !note.important }
 
     noteService
       .update(id, changedNote)
@@ -114,20 +114,20 @@ const loginForm = () => {
       })
   }
 
-const Footer = () => {
-  const footerStyle = {
-    color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16
-  }
+  const Footer = () => {
+    const footerStyle = {
+      color: 'green',
+      fontStyle: 'italic',
+      fontSize: 16
+    }
 
-  return (
-    <div style={footerStyle}>
-      <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
-    </div>
-  )
-}
+    return (
+      <div style={footerStyle}>
+        <br />
+        <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -148,10 +148,10 @@ const Footer = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map(note => 
-          <Note 
-            key={note.id} 
-            note={note} 
+        {notesToShow.map(note =>
+          <Note
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
         )}
