@@ -8,7 +8,7 @@ import Toggleable from './components/Togglable'
 import NoteForm from './components/NoteForm'
 
 
-const App = (props) => {
+const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
@@ -90,11 +90,6 @@ const loginForm = () => {
       <NoteForm createNote={addNote} />
     </Toggleable>
     )
-  }
-
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
-    setNewNote(event.target.value)
   }
 
   const notesToShow = showAll ? notes: notes.filter(note=>note.important === true)
