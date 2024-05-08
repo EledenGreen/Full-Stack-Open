@@ -1,4 +1,6 @@
 const { test, describe, expect, beforeEach } = require('@playwright/test')
+const exp = require('constants')
+const { loginWith } = require('./helper')
 
 describe('Note app', () => {
     beforeEach(async ({ page, request }) => {
@@ -14,6 +16,28 @@ describe('Note app', () => {
         await page.goto('http://localhost:5173')
     })
 
+    test('user can login with correct credentials', async ({ page }) => {
+        await page.getByRole('button', { name: 'login' }).click()
+        await page.getByTestId('username').fill('mluukkai')
+        await page.getByTestId('password').fill('salainen')
+        await page.getByRole('button', { name: 'login' }).click()
+        await expect(page.getByText('Matti Luukkainen logged-in')).toBeVisible()
+    })
+
+    test('login fails with wrong password', async ({ page }) => {
+        await page.getByRole('button', { name: 'login' }).click()
+        await page.getByTestId('username').fill('mluukkai')
+        await page.getByTestId('password').fill('wrong')
+        await page.getByRole('button', { name: 'login' }).click()
+
+        const errorDiv = await page.locator('.error')
+        await expect(errorDiv).toContainText('Wrong credentials')
+        await expect(errorDiv).toHaveCSS('border-style', 'solid')
+        await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
+
+        await expect(page.getByText('Matti Luukkainen logged-in')).not.toBeVisible()
+    })
+
     test('front page can be opened', async ({ page }) => {
       
         const locator = await page.getByText('Notes')
@@ -22,22 +46,13 @@ describe('Note app', () => {
       })
 
     test('User can log in', async ({ page }) => {
-
-        await page.getByRole('button', { name: 'login'}).click()
-        await page.getByTestId('username').fill('mluukkai')
-        await page.getByTestId('password').fill('salainen')
-
-        await page.getByRole('button', { name: 'login' }).click()
-
+        await loginWith(page, 'mluukkai', 'salainen')
         await expect(page.getByText('Matti Luukkainen logged-in')).toBeVisible()
     })
 
     describe('when logged in', () => {
         beforeEach(async ({ page }) => {
-            await page.getByRole('button', { name: 'login' }).click()
-            await page.getByTestId('username').fill('mluukkai')
-            await page.getByTestId('password').fill('salainen')
-            await page.getByRole('button', { name: 'login' }).click()
+            await loginWith(page, 'mluukkai', 'salainen')
         })
 
         test('a new note can be created', async ({ page }) => {
