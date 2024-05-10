@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-const noteReducer = (state = [], action) => {
-  if (action.type === 'NEW_NOTE') {
-    state.concat(action.payload)
-    return state
-  }
 
-  return state
-}
 
 const store = createStore(noteReducer)
 
