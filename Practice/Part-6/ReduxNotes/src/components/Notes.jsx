@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleImportanceOf } from "../reducers/noteReducer";
+import PropTypes from 'prop-types'
 
 const Note = ({ note, handleClick}) => {
     return (
@@ -10,13 +11,18 @@ const Note = ({ note, handleClick}) => {
     )
 }
 
+Note.propTypes = {
+    note: PropTypes.object.isRequired,
+    handleClick: PropTypes.func.isRequired
+}
+
 const Notes = () => {
     const dispatch = useDispatch()
     const notes = useSelector(({ filter, notes }) => {
         if ( filter === 'ALL') {
             return notes
         }
-        return filter === 'IMPORTANT'
+        return filter === 'IMPORTANT'   //behaves as default
             ? notes.filter(note => note.important)
             : notes.filter(note => !note.important)
     })
