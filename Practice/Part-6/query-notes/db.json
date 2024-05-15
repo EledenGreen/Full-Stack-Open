@@ -1,19 +1,39 @@
 {
-    "notes": [
-        {
-            "content": "the app state is in redux store",
-            "important": true,
-            "id": 1
-        },
-        {
-            "content": "state changes are made with actions",
-            "important": false,
-            "id": 2
-        },
-        {
-            "content": "state is stored in the backend",
-            "important": false,
-            "id": 3
-        }
-    ]
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": false,
+      "id": "1"
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": false,
+      "id": "2"
+    },
+    {
+      "content": "state is stored in the backend",
+      "important": false,
+      "id": "3"
+    },
+    {
+      "id": "b3d3",
+      "content": "test",
+      "important": true
+    },
+    {
+      "id": "cbce",
+      "content": "test",
+      "important": true
+    },
+    {
+      "id": "c733",
+      "content": "mermaid",
+      "important": false
+    },
+    {
+      "id": "676e",
+      "content": "data",
+      "important": true
+    }
+  ]
 }
