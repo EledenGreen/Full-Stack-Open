@@ -19,8 +19,7 @@ const useNotes = (url) => {
 const App = () => {
     const [counter, setCounter] = useState(0)
     const [values, setValues] = useState([])
-    const url = 'http://localhost:3001/notes'
-    const notes = useNotes(url)
+    const notes = useNotes(BACKEND_URL)
 
     const handleClick = () => {
         setCounter(counter + 1)
@@ -33,7 +32,7 @@ const App = () => {
                 press
             </button>
             <div>
-                {notes.length} notes on server {url}
+                {notes.length} notes on server {BACKEND_URL}
             </div>
         </div>
     )
