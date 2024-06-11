@@ -9,3 +9,5 @@ onenote.*
 .env
 
 /LogSeq Notebook/
+
+node_modules
