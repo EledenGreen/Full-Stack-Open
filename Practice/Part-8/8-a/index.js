@@ -2,6 +2,7 @@ const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 const { v1: uuid } = require('uuid')
 const { GraphQLError } = require('graphql')
+const { gql } = require('graphql-tag')
 
 let persons = [
   {
@@ -26,11 +27,11 @@ let persons = [
   },
 ]
 
-const typeDefs = `
-    type Address {
-        street: String!
-        city: String!
-    }
+const typeDefs = gql`
+  type Address {
+    street: String!
+    city: String!
+  }
 
   type Person {
     name: String!
@@ -39,7 +40,7 @@ const typeDefs = `
     id: ID!
   }
 
-  enum  YesNo {
+  enum YesNo {
     YES
     NO
   }
@@ -52,16 +53,13 @@ const typeDefs = `
 
   type Mutation {
     addPerson(
-        name: String!
-        phone: String
-        street: String!
-        city: String!
+      name: String!
+      phone: String
+      street: String!
+      city: String!
     ): Person
-    
-    editNumber(
-        name: String!
-        phone: String!
-    ): Person
+
+    editNumber(name: String!, phone: String!): Person
   }
 `
 
