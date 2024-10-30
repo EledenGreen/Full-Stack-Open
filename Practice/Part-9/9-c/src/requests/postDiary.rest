@@ -3,7 +3,8 @@ Content-Type: application/json
 
 {
     "date": "2024-01-01",
-    "weather": "stormy",
-    "visibility": "very low"
+    "weather": "sunny",
+    "visibility": "poor",
+    "comment": "test input"
 
 }
